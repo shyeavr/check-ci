@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-                label 'agentlinux'
-            }
+    agent any
     stages {
         stage('Checkout Code') {
             steps {
@@ -10,7 +8,7 @@ pipeline {
                         $class: 'GitSCM',
                         branches: [[name: "*/${params.BRANCH}"]],
                         userRemoteConfigs: [[
-                            url: 'git@github.com:MapColonies/helm-charts.git',
+                            url: 'git@github.com:shyeavr/check-ci.git',
                             credentialsId: 'mapcolonies-devops-key'
                         ]]
                     ])
