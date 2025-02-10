@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+    <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="10" time="0.031"
+               timestamp="2025-02-09T09:40:04.689958+02:00" hostname="V-P-SHAYAVR-L-RF">
+        <testcase classname="tests.test_addition" name="test_add" file="tests/test_addition.py" line="4" time="0.001"/>
+        <testcase classname="tests.test_addition" name="test_add_string" file="tests/test_addition.py" line="9"
+                  time="0.000"/>
+        <testcase classname="tests.test_division" name="test_divide" file="tests/test_division.py" line="4"
+                  time="0.000"/>
+        <testcase classname="tests.test_division" name="test_divide_by_zero" file="tests/test_division.py" line="9"
+                  time="0.000"/>
+        <testcase classname="tests.test_division" name="test_divide_string" file="tests/test_division.py" line="14"
+                  time="0.000"/>
+        <testcase classname="tests.test_multiplication" name="test_multiply" file="tests/test_multiplication.py"
+                  line="4" time="0.000"/>
+        <testcase classname="tests.test_multiplication" name="test_multiply_string" file="tests/test_multiplication.py"
+                  line="9" time="0.000"/>
+        <testcase classname="tests.test_subtraction" name="test_subtract_positive" file="tests/test_subtraction.py"
+                  line="4" time="0.001"/>
+        <testcase classname="tests.test_subtraction" name="test_subtract_negative" file="tests/test_subtraction.py"
+                  line="9" time="0.001"/>
+        <testcase classname="tests.test_subtraction" name="test_subtract_string" file="tests/test_subtraction.py"
+                  line="14" time="0.001"/>
+    </testsuite>
+</testsuites>
