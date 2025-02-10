@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+        agent {
+        kubernetes {
+            cloud 'kubernetes'
+            yamlFile 'podSpec.yaml'
+        }
+    }
     stages {
         stage('Checkout Code') {
             steps {
