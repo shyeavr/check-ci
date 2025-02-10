@@ -1,39 +1,28 @@
 #!/bin/bash
-set -e  # Exit on error
+set -e  # Exit immediately if a command fails
 
-# Load the environment variables properly
-export HOME=/home/jenkins  # Ensure this is correct for your Jenkins user
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
-
-# Initialize pyenv
-if [ -d "$PYENV_ROOT" ]; then
-    eval "$(pyenv init --path)"
+# Ensure Python 3.10 is installed
+if ! command -v python3.10 &>/dev/null; then
+    echo "Error: Python 3.10 is not installed. Install it and retry."
+    exit 1
 fi
 
-# Debugging: Print available Python versions
-pyenv versions
+# Create a virtual environment
+python3.10 -m venv myenv || { echo "Error: Failed to create virtual environment"; exit 1; }
 
-# Set the desired Python version
-pyenv install -s 3.10.0  # Install only if missing
-pyenv global 3.10.0
-
-# Create and activate virtual environment
-python3 -m venv myenv
-source myenv/bin/activate
+# Activate the virtual environment
+source myenv/bin/activate || { echo "Error: Virtual environment activation failed"; exit 1; }
 
 echo '#### Checking Python ####'
 which python3
-python3 -V
+python3 -V || { echo "Error: Python version check failed"; exit 1; }
 
 echo '#### Installing requirements ####'
-pip install -r ./requirements.txt
+pip install --upgrade pip
+pip install -r ./requirements.txt || { echo "Error: Failed to install requirements"; exit 1; }
 
 echo '#### Run tests ####'
-pytest tests --alluredir=./allure_results --junitxml=./xmlReport/output.xml
+pytest tests --alluredir=./allure_results --junitxml=./xmlReport/output.xml || { echo "Error: Tests failed"; exit 1; }
 
 echo '### Deactivating virtual environment ###'
 deactivate
-
-echo '### Resetting pyenv to system default ###'
-pyenv global system
