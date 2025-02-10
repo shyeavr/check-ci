@@ -5,10 +5,16 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/shyeavr/check-ci.git'
-                sh "ls -lat"
-                echo "done checkout"
-                echo params.BuildId
+                script {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: "*/${params.BRANCH}"]],
+                        userRemoteConfigs: [[
+                            url: 'git@github.com:MapColonies/helm-charts.git',
+                            credentialsId: 'mapcolonies-devops-key'
+                        ]]
+                    ])
+                }
             }
         }
 		stage('Run Tests') {
@@ -17,13 +23,13 @@ pipeline {
 				sh('bash ./jenkinsscript.sh')
           }
         }
-	stage("publish junit report") {
+	    stage("publish junit report") {
             steps{
                 echo "publishing junit"
                 junit skipMarkingBuildUnstable: true, testResults: 'xmlReport/output.xml'
             }
         }
-	stage("Publish Allure Report")	{
+	    stage("Publish Allure Report")	{
 		steps{
 			echo "Publish Allure"
 			allure includeProperties: false, jdk: '', results: [[path: 'allure_results']]
