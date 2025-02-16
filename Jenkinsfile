@@ -1,5 +1,10 @@
 pipeline {
-    agent { docker { image 'python:3.13.2-alpine3.21' } }
+        agent {
+        kubernetes {
+            cloud 'kubernetes'
+            yamlFile 'podSpec.yaml'
+        }
+    }
     stages {
         stage('Checkout Code') {
             steps {
@@ -34,16 +39,5 @@ pipeline {
 		}
 	}
 
-    }
-post {
-    always {
-        echo 'Cleaning up workspace'
-        cleanWs()
-    }
-    success {
-        echo 'Pipeline succeeded!'
-    }
-    failure {
-        echo 'Pipeline failed!'
     }
 }
