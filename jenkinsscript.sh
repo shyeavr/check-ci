@@ -1,28 +1,27 @@
 #!/bin/bash
-set -e  # Exit immediately if a command fails
-
-# Ensure Python 3.10 is installed
-if ! command -v python3.10 &>/dev/null; then
-    echo "Error: Python 3.10 is not installed. Install it and retry."
-    exit 1
+. ~/.bashrc
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+ eval "$(pyenv init --path)"
 fi
 
-# Create a virtual environment
-python3.10 -m venv myenv || { echo "Error: Failed to create virtual environment"; exit 1; }
+pyenv versions
 
-# Activate the virtual environment
-source myenv/bin/activate || { echo "Error: Virtual environment activation failed"; exit 1; }
-
-echo '#### Checking Python ####'
+pyenv global 3.10.0
+python3 -m venv myenv
+source myenv/bin/activate
+echo '#### Checking python ####'
 which python3
-python3 -V || { echo "Error: Python version check failed"; exit 1; }
+python3 -V
 
 echo '#### Installing requirements ####'
-pip install --upgrade pip
-pip install -r ./requirements.txt || { echo "Error: Failed to install requirements"; exit 1; }
+pip install -r ./requirements.txt
 
 echo '#### Run tests ####'
-pytest tests --alluredir=./allure_results --junitxml=./xmlReport/output.xml || { echo "Error: Tests failed"; exit 1; }
+pytest APITests --alluredir=./allure_results  --junitxml=./xmlReport/output.xml
 
-echo '### Deactivating virtual environment ###'
+echo '### deactivate virtual environment ###'
 deactivate
+echo '### change pyenv to system ###'
+pyenv global system
