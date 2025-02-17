@@ -2,5 +2,8 @@ FROM python:3.6-slim
 COPY . /check-ci
 WORKDIR /python-test-calculator
 RUN pip install --no-cache-dir -r requirements.txt
-RUN ["pytest", "-v", "--alluredir=reports/allure_results", "--junitxml=reports/result.xml"]
-CMD tail -f /dev/null
+# RUN ["pytest", "-v", "--alluredir=reports/allure_results", "--junitxml=reports/result.xml"]
+CMD pytest -v --alluredir=reports/allure-results --junitxml=reports/result.xml && \
+    allure generate reports/allure-results -o reports/allure-report --clean && \
+    tail -f /dev/null
+# CMD tail -f /dev/null
