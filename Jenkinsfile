@@ -24,8 +24,7 @@ pipeline {
            steps {
 				echo "Setup and run API Tests"
 				sh('bash ./jenkinsscript.sh')
-                sh('ls -lah build/allure-results')  // Check if results exist
-                sh('allure generate build/allure-results -o build/allure-report --clean')
+
           }
         }
 	    stage("Publish Allure Report")	{
