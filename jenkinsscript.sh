@@ -24,4 +24,4 @@ pytest APITests --alluredir=./allure-results  --junitxml=./xmlReport/output.xml
 echo '### deactivate virtual environment ###'
 deactivate
 echo '### change pyenv to system ###'
-pyenv global system
+#pyenv global system
