@@ -21,6 +21,12 @@ pip install -r ./requirements.txt
 echo '#### Run tests ####'
 pytest tests/ --alluredir=./allure-results
 
+echo '#### Checking Allure results ####'
+ls -lah ./allure-results
+
+allure generate ./allure-results -o ./allure-report --clean
+
+
 echo '### deactivate virtual environment ###'
 deactivate
 echo '### change pyenv to system ###'
