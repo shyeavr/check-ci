@@ -37,3 +37,4 @@ urllib3==1.26.8
 virtualenv==20.13.2
 webdriver-manager==3.5.3
 wsproto==1.0.0
+allure-pytest==2.13.5
