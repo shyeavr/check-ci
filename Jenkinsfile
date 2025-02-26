@@ -26,16 +26,10 @@ pipeline {
 				sh('bash ./jenkinsscript.sh')
           }
         }
-	    stage("publish junit report") {
-            steps{
-                echo "publishing junit"
-                junit skipMarkingBuildUnstable: true, testResults: 'xmlReport/output.xml'
-            }
-        }
 	    stage("Publish Allure Report")	{
 		steps{
 			echo "Publish Allure"
-			allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+			allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
 		}
 	}
 

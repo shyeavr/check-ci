@@ -19,7 +19,7 @@ echo '#### Installing requirements ####'
 pip install -r ./requirements.txt
 
 echo '#### Run tests ####'
-pytest tests/ --alluredir=./allure-results  --junitxml=./xmlReport/output.xml
+pytest tests/ --alluredir=./allure-results
 
 echo '### deactivate virtual environment ###'
 deactivate
