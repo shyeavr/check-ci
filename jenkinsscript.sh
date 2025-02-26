@@ -22,7 +22,7 @@ echo '#### Run tests ####'
 pytest tests/ --alluredir=./allure-results
 
 echo '#### Checking Allure results ####'
-ls -lah ./allure-results/jenkins
+ls -lah ./allure-results
 
 #allure generate ./allure-results -o ./allure-report --clean
 
