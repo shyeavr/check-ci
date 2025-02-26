@@ -30,7 +30,7 @@ pipeline {
 	    stage("Publish Allure Report")	{
             steps{
                 echo "Publish Allure"
-                allure includeProperties: false, jdk: '', results: [[path: '/home/jenkins/agent/workspace/automation-pipeline/allure-results']]
+                allure includeProperties: false, jdk: '', results: [[path: './allure-results']]
             }
 	}
 
