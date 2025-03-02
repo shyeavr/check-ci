@@ -22,9 +22,13 @@ echo '#### Run tests ####'
 
 pytest ${marker} --alluredir=${ALLURE_RESULTS_DIR} --capture=no -v
 
+echo '#### Checking Allure results content ####'
+ls -l ${ALLURE_RESULTS_DIR}
+
 
 echo '#### Checking Allure results ####'
 ls -lah ./allure-results
+
 
 #allure generate ./allure-results -o ./allure-report --clean
 
