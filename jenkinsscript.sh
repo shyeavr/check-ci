@@ -19,7 +19,9 @@ echo '#### Installing requirements ####'
 pip install -r ./requirements.txt
 
 echo '#### Run tests ####'
-pytest tests/ --alluredir= ${WORKSPACE}/allure-results
+
+pytest ${marker} --alluredir=${ALLURE_RESULTS_DIR} --capture=no -v
+
 
 echo '#### Checking Allure results ####'
 ls -lah ./allure-results
